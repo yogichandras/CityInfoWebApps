@@ -11,7 +11,6 @@ using Swashbuckle.AspNetCore.Swagger;
 using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
 using Abp.Extensions;
-using CityInfo.Authentication.JwtBearer;
 using CityInfo.Configuration;
 using CityInfo.Identity;
 
@@ -44,6 +43,8 @@ namespace CityInfo.Web.Host.Startup
             services.AddMvc(
                 options => options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName))
             );
+
+        
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);

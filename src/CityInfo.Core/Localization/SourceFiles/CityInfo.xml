@@ -18,8 +18,12 @@
     <text name="TenancyName" value="Tenancy name" />
     <text name="UserNameOrEmail" value="User name or email" />
     <text name="Password" value="Password" />
-    <text name="RememberMe" value="Remember me" />
+    <text name="RememberYou" value="Remember you" />
     <text name="LogIn" value="Log in" />
+    
+    <text name="DataTempat" value="Data Tempat" />
+    
+     <text name="Kategori" value="Kategori" />
 
     <text name="LoginFailed" value="Login failed!" />
 

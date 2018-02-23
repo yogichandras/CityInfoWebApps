@@ -12,6 +12,8 @@ using CityInfo.Authentication.JwtBearer;
 using CityInfo.Configuration;
 using CityInfo.Identity;
 using CityInfo.Web.Resources;
+using CityInfo.Web.Models;
+using Microsoft.EntityFrameworkCore;
 
 #if FEATURE_SIGNALR
 using Owin;
@@ -38,6 +40,10 @@ namespace CityInfo.Web.Startup
             services.AddMvc(
                 options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute())
             );
+
+
+            var connection = @"server=localhost;userid=root;password=;database=cityinfodb";
+            services.AddDbContext<Solution>(options => options.UseMySql(connection));
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);

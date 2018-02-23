@@ -29,6 +29,8 @@
     <ProjectReference Include="..\CityInfo.Web.Core\CityInfo.Web.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="bootstrap" Version="4.0.0" />
+    <PackageReference Include="jQuery.filedrop" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2">
       <PrivateAssets>All</PrivateAssets>

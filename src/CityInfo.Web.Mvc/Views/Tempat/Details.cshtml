@@ -1,0 +1,43 @@
+﻿@model CityInfo.Web.Models.MasterTempat
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MasterTempat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.createdate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.createdate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.picture)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.picture)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.idKategori)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.idKategori)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
