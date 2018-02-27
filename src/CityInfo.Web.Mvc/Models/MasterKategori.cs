@@ -10,7 +10,7 @@ namespace CityInfo.Web.Models
     {
 
         [Key]
-        public int kategori_id { get; set; }
+        public int id { get; set; }
 
         [StringLength(200)]
         public string kategori { get; set; }

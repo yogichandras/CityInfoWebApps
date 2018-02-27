@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CityInfo.Web.Models;
 using Abp.AspNetCore.Mvc.Authorization;
 using Abp.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace CityInfo.Web.Mvc.Controllers
 {
@@ -19,6 +18,17 @@ namespace CityInfo.Web.Mvc.Controllers
         public TempatController(Solution context)
         {
             _context = context;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upload(IFormFile file)
+        {
+            var uploads = Path.Combine("images");
+            if (file.Length > 0)
+                using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                    await file.CopyToAsync(fileStream);
+
+            return RedirectToAction("Create");
         }
 
         // GET: Tempat
@@ -66,6 +76,8 @@ namespace CityInfo.Web.Mvc.Controllers
             }
             return View(masterTempat);
         }
+
+       
 
         // GET: Tempat/Edit/5
         public async Task<IActionResult> Edit(int? id)

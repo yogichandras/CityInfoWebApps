@@ -6,14 +6,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section styles {
+<link href="~/dropzone/dropzone.css" rel="stylesheet" />
+}
+@section scripts
+    {
+    <environment names="Development">
+        <script src="~/dropzone/dropzone.js"></script>
+    </environment>
+
+    <script type="text/javascript">
+
+        Dropzone.options.UploadForm = {
+            maxFilesize: 20, // MB
+            acceptedFiles: "image/*"
+        };
+    </script>
+
+}
+
+
+
+
+
 <h2>Create</h2>
 
 <h4>MasterTempat</h4>
 <hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <div id="dropzone">
+            <form asp-action="Upload" class="dropzone needsclick dz-clickable" id="uploader">
+                <div class="dz-message needsclick">
+                    Drop files here or click to upload.<br>
+                    <img src="~/images/upload.png" style="width:50px;" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="picture" class="control-label">PICTURE NAME/URL</label>
+                <input asp-for="picture" class="form-control" />
+                <span asp-validation-for="picture" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="title" class="control-label">TITLE</label>
                 <input asp-for="title" class="form-control" />
@@ -24,31 +66,22 @@
                 <input type="date" asp-for="createdate" class="form-control" />
                 <span asp-validation-for="createdate" class="text-danger"></span>
             </div>
-            
-            @*<div class="form-group">
-                <label asp-for="picture" class="control-label">PICTURE (URL)</label>
-                <input type="file" asp-for="picture" class="form-control" />
-                <span asp-validation-for="picture" class="text-danger"></span>
-            </div>*@
+
+
+
+
+
 
             <div class="form-group">
                 <label asp-for="idKategori" class="control-label">ID KATEGORI</label>
                 <input asp-for="idKategori" class="form-control" />
                 <span asp-validation-for="idKategori" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" id="upload_button" />
             </div>
-
-            <div id="dropArea">
-                Drop Your Files
-            </div>
-            <h4>Uploaded Files</h4>
-            <ul class="list-group" id="uploadList">
-
-
-
-            </ul>
         </form>
     </div>
 </div>
@@ -57,61 +90,3 @@
 
     <a asp-action="Index"><< Back to List</a>
 </div>
-
-<style>
-    #dropArea{
-        background: #b5b5b5;
-        border: black dashed 1px;
-        height: 50px;
-        text-align: center;
-        color: #fff;
-
-    }
-
-    .active-drop{
-        background: #77bafa !important;
-        border: solid 2px blue !important;
-        opacity: .5;
-        color: black !important;
-    }
-</style>
-
-@section Scripts {
-   
-    <script src="~/js/jquery.filedrop.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('#dropArea').filedrop({
-                url: '@Url.Action("Create")',
-                allowedfiletypes: ['image/jpeg','image/png'],
-                allowedfileextensions: ['.jpg', '.jpeg', '.png'],
-                paramname: 'files',
-                maxfiles: 5,
-                maxfilesize: 5,
-                dragOver: function () {
-                    $('#dropArea').addClass('active-drop');
-
-
-                },
-                dragLeave: function () {
-                    $('#dropArea').removeClass('active-drop');
-
-                },
-                drop: function () {
-                    $('#dropArea').removeClass('active-drop');
-
-                },
-
-                afterAll: function (e) {
-                    $('#dropArea').html('file(s) uploaded succesfull')
-
-                },
-                uploadFinished: function (i, file, response, time) {
-                    $('uploadList').append('<li class="list-group-item">'+file.name+'</li>')
-                }
-
-            })
-
-        })
-    </script>
-}

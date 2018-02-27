@@ -36,7 +36,7 @@ namespace CityInfo.Web.Mvc.Controllers
             }
 
             var masterKategori = await _context.Kategori
-                .SingleOrDefaultAsync(m => m.kategori_id == id);
+                .SingleOrDefaultAsync(m => m.id == id);
             if (masterKategori == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace CityInfo.Web.Mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("kategori_id,kategori")] MasterKategori masterKategori)
+        public async Task<IActionResult> Create([Bind("id,kategori")] MasterKategori masterKategori)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace CityInfo.Web.Mvc.Controllers
                 return NotFound();
             }
 
-            var masterKategori = await _context.Kategori.SingleOrDefaultAsync(m => m.kategori_id == id);
+            var masterKategori = await _context.Kategori.SingleOrDefaultAsync(m => m.id == id);
             if (masterKategori == null)
             {
                 return NotFound();
@@ -88,9 +88,9 @@ namespace CityInfo.Web.Mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("kategori_id,kategori")] MasterKategori masterKategori)
+        public async Task<IActionResult> Edit(int id, [Bind("id,kategori")] MasterKategori masterKategori)
         {
-            if (id != masterKategori.kategori_id)
+            if (id != masterKategori.id)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace CityInfo.Web.Mvc.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MasterKategoriExists(masterKategori.kategori_id))
+                    if (!MasterKategoriExists(masterKategori.id))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace CityInfo.Web.Mvc.Controllers
             }
 
             var masterKategori = await _context.Kategori
-                .SingleOrDefaultAsync(m => m.kategori_id == id);
+                .SingleOrDefaultAsync(m => m.id == id);
             if (masterKategori == null)
             {
                 return NotFound();
@@ -141,7 +141,7 @@ namespace CityInfo.Web.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var masterKategori = await _context.Kategori.SingleOrDefaultAsync(m => m.kategori_id == id);
+            var masterKategori = await _context.Kategori.SingleOrDefaultAsync(m => m.id == id);
             _context.Kategori.Remove(masterKategori);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -149,7 +149,7 @@ namespace CityInfo.Web.Mvc.Controllers
 
         private bool MasterKategoriExists(int id)
         {
-            return _context.Kategori.Any(e => e.kategori_id == id);
+            return _context.Kategori.Any(e => e.id == id);
         }
     }
 }

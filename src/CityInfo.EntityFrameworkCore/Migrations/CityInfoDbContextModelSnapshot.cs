@@ -983,6 +983,48 @@ namespace CityInfo.Migrations
                     b.ToTable("AbpUsers");
                 });
 
+            modelBuilder.Entity("CityInfo.Models.MasterKategori", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("MasterKategoriId");
+
+                    b.Property<string>("kategori")
+                        .HasMaxLength(400);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MasterKategoriId");
+
+                    b.ToTable("Kategori");
+                });
+
+            modelBuilder.Entity("CityInfo.Models.MasterTempat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Createdate")
+                        .HasMaxLength(400);
+
+                    b.Property<int>("IdKategori");
+
+                    b.Property<int?>("MasterTempatId");
+
+                    b.Property<string>("Picture")
+                        .HasMaxLength(400);
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(400);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MasterTempatId");
+
+                    b.ToTable("Tempat");
+                });
+
             modelBuilder.Entity("CityInfo.MultiTenancy.Tenant", b =>
                 {
                     b.Property<int>("Id")
@@ -1181,6 +1223,20 @@ namespace CityInfo.Migrations
                     b.HasOne("CityInfo.Authorization.Users.User", "LastModifierUser")
                         .WithMany()
                         .HasForeignKey("LastModifierUserId");
+                });
+
+            modelBuilder.Entity("CityInfo.Models.MasterKategori", b =>
+                {
+                    b.HasOne("CityInfo.Models.MasterKategori")
+                        .WithMany("Kategoris")
+                        .HasForeignKey("MasterKategoriId");
+                });
+
+            modelBuilder.Entity("CityInfo.Models.MasterTempat", b =>
+                {
+                    b.HasOne("CityInfo.Models.MasterTempat")
+                        .WithMany("Tempat")
+                        .HasForeignKey("MasterTempatId");
                 });
 
             modelBuilder.Entity("CityInfo.MultiTenancy.Tenant", b =>

@@ -3,6 +3,8 @@ using Abp.Zero.EntityFrameworkCore;
 using CityInfo.Authorization.Roles;
 using CityInfo.Authorization.Users;
 using CityInfo.MultiTenancy;
+using System.Collections.Generic;
+using CityInfo.Models;
 
 namespace CityInfo.EntityFrameworkCore
 {
@@ -12,11 +14,17 @@ namespace CityInfo.EntityFrameworkCore
         
         public CityInfoDbContext(DbContextOptions<CityInfoDbContext> options)
             : base(options)
+
         {
+
         }
 
-      
+        public virtual DbSet<MasterTempat> Tempat { get; set; }
+
+        public virtual DbSet<MasterKategori> Kategori { get; set; }
+
 
 
     }
+
 }

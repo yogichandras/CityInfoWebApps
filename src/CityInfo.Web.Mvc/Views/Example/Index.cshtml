@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/dropzone/dropzone.js"></script>
+<link href="~/dropzone/dropzone.css" rel="stylesheet" />
+
+<script>
+    Dropzone.options.UploadForm = {
+        maxFilesize: 20, // MB
+        acceptedFiles: "image/*"
+    };
+</script>
+
+<div class="row">
+    <div class="col-md-9">
+        <div id="dropzone">
+            <form asp-action="Upload" class="dropzone needsclick dz-clickable" id="uploader">
+                <div class="dz-message needsclick">
+                    Drop files here or click to upload.<br>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
