@@ -9,5 +9,7 @@
         public const string Roles = "Roles";
         public const string DataTempat = "DataTempat";
         public const string Kategori = "Kategori";
+
+        public const string Gallery = "Gallery";
     }
 }

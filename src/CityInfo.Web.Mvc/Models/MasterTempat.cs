@@ -12,18 +12,18 @@ namespace CityInfo.Web.Models
         public int id{ get; set; }
 
         [StringLength(400)]
-        [Required]
+     
         public string title { get; set; }
 
         [StringLength(400)]
-        [Required]
+  
         public string createdate { get; set; }
 
         [StringLength(400)]
-        [Required]
+        
         public string picture { get; set; }
 
-        [Required]
+       
         public int idKategori { get; set; }
 
 

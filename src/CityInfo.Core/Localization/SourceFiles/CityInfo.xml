@@ -25,6 +25,8 @@
     
      <text name="Kategori" value="Kategori" />
 
+    <text name="Gallery" value="Gallery" />
+
     <text name="LoginFailed" value="Login failed!" />
 
     <text name="NameSurname" value="Name surname" />

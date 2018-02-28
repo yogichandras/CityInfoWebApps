@@ -1,0 +1,73 @@
+﻿@model CityInfo.Web.Models.Gallery
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles {
+    <link href="~/dropzone/dropzone.css" rel="stylesheet" />
+}
+@section scripts
+    {
+    <environment names="Development">
+        <script src="~/dropzone/dropzone.js"></script>
+    </environment>
+
+
+}
+
+
+
+
+
+
+<h2>Create</h2>
+
+<h4>Gallery</h4>
+<hr />
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" class="dropzone needsclick dz-clickable" id="uploader">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="id_tempat" class="control-label"></label>
+                <select asp-for="id_tempat" class="form-control" asp-items="ViewBag.id_tempat"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="id_kategori" class="control-label"></label>
+                <select asp-for="id_kategori" class="form-control" asp-items="ViewBag.id_kategori"></select>
+            </div>
+            <div class="form-group" id="picture">
+                <label asp-for="image" class="control-label"></label>
+                <input asp-for="image" class="form-control" />
+                <span asp-validation-for="image" class="text-danger"></span>
+            </div>
+            <div id="dropzone">
+
+                <div class="dz-message needsclick">
+                    Drop files here or click to upload.<br>
+                    <img src="~/images/upload.png" style="width:50px;" />
+                </div>
+
+            </div>
+
+        </form>
+        <button onclick="myFunction()">test</button>
+        <h1 id="demo"></h1>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script type="text/javascript">
+
+            function myFunction() {
+                document.getElementById("demo").innerHTML = "hellow";
+            }
+   
+</script>

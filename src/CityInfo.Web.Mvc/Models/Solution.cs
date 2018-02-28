@@ -10,7 +10,7 @@ namespace CityInfo.Web.Models
     {
         public Solution(DbContextOptions<Solution> options) : base(options) { }
 
-        public DbSet<Person> Person { get; set; }
+        public DbSet<Gallery> Gallery { get; set; }
 
         public DbSet<MasterTempat> Tempat { get; set; }
 

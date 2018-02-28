@@ -26,7 +26,7 @@ namespace CityInfo.Web.Mvc.Controllers
             var uploads = Path.Combine("images");
             if (file.Length > 0)
                 using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
-                    await file.CopyToAsync(fileStream);
+                   await file.CopyToAsync(fileStream);
 
             return RedirectToAction("Create");
         }
