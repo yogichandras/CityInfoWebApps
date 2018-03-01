@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form name="form" action="/Upload/Uploader" enctype="multipart/form-data" method="post">
+    <input id="files" name="files" type="file" multiple onchange="fileupload('files');"/>
+</form>
+
+<script src="~/js/myjsfile.js"></script>

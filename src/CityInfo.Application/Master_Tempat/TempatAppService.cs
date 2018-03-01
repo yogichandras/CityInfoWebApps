@@ -21,7 +21,6 @@ namespace CityInfo.Master_Tempat
             _tempatManager = tempatManager;
         }
 
-      
        
         public GetTempatOutput GetTempatById(GetTempatInput input)
         {
@@ -32,8 +31,8 @@ namespace CityInfo.Master_Tempat
 
         public GetTempatOutput GetTempatByIdKategori(GetTempatKategori input)
         {
-            var getTempat = _tempatManager.GetTempatByIdKategori(input.IdKategori);
-            GetTempatOutput output = Mapper.Map<MasterTempat, GetTempatOutput>(getTempat);
+            var getTempatKategori = _tempatManager.GetTempatByIdKategori(input.IdKategori);
+            GetTempatOutput output = Mapper.Map<MasterTempat, GetTempatOutput>(getTempatKategori);
             return output;
         }
 

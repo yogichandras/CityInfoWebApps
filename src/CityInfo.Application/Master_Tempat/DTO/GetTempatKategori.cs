@@ -7,7 +7,6 @@ namespace CityInfo.Master_Tempat.DTO
     public class GetTempatKategori
     {
         public int IdKategori { get; set; }
-
-        public virtual ICollection<GetTempatKategori> Kategori { get; set; }
+        
     }
 }
