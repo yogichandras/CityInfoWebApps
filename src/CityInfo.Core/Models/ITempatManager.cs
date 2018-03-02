@@ -10,6 +10,6 @@ namespace CityInfo.Models
     {
         IEnumerable<MasterTempat> GetTempat();
         MasterTempat GetTempatById(int Id);
-        MasterTempat GetTempatByIdKategori(int IdKategori);
+        IEnumerable<MasterTempat> GetTempatByIdKategori(int IdKategori);
     }
 }

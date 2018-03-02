@@ -7,23 +7,26 @@ using Abp.AspNetCore.Mvc.Authorization;
 using Abp.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace CityInfo.Web.Mvc.Controllers
 {
     [AbpMvcAuthorize]
     public class TempatController : AbpController
     {
+        private IHostingEnvironment _hostingEnvironment;
         private readonly Solution _context;
 
-        public TempatController(Solution context)
+        public TempatController(Solution context,IHostingEnvironment hostingEnvironment)
         {
+            _hostingEnvironment = hostingEnvironment;
             _context = context;
         }
 
         [HttpPost]
         public async Task<IActionResult> Upload(IFormFile file)
         {
-            var uploads = Path.Combine("images");
+            var uploads = _hostingEnvironment.WebRootPath + "\\upload\\";
             if (file.Length > 0)
                 using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
                    await file.CopyToAsync(fileStream);

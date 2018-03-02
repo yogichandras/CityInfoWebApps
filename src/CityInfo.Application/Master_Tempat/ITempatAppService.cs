@@ -12,6 +12,6 @@ namespace CityInfo.Master_Tempat
         IEnumerable<GetTempatOutput> ListAll();
         GetTempatOutput GetTempatById(GetTempatInput input);
 
-        GetTempatOutput GetTempatByIdKategori(GetTempatKategori input);
+        IEnumerable<GetTempatOutput> GetTempatByIdKategori(GetTempatKategori input);
     }
 }

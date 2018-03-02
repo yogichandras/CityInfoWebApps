@@ -983,6 +983,30 @@ namespace CityInfo.Migrations
                     b.ToTable("AbpUsers");
                 });
 
+            modelBuilder.Entity("CityInfo.Models.MasterGallery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("MasterGalleryId");
+
+                    b.Property<int>("id_kategori");
+
+                    b.Property<int>("id_tempat");
+
+                    b.Property<string>("image");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MasterGalleryId");
+
+                    b.HasIndex("id_kategori");
+
+                    b.HasIndex("id_tempat");
+
+                    b.ToTable("Gallery");
+                });
+
             modelBuilder.Entity("CityInfo.Models.MasterKategori", b =>
                 {
                     b.Property<int>("Id")
@@ -1223,6 +1247,23 @@ namespace CityInfo.Migrations
                     b.HasOne("CityInfo.Authorization.Users.User", "LastModifierUser")
                         .WithMany()
                         .HasForeignKey("LastModifierUserId");
+                });
+
+            modelBuilder.Entity("CityInfo.Models.MasterGallery", b =>
+                {
+                    b.HasOne("CityInfo.Models.MasterGallery")
+                        .WithMany("Gallery")
+                        .HasForeignKey("MasterGalleryId");
+
+                    b.HasOne("CityInfo.Models.MasterKategori", "MasterKategori")
+                        .WithMany()
+                        .HasForeignKey("id_kategori")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CityInfo.Models.MasterTempat", "MasterTempat")
+                        .WithMany()
+                        .HasForeignKey("id_tempat")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CityInfo.Models.MasterKategori", b =>

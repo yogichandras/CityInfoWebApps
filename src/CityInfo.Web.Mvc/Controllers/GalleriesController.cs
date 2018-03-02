@@ -10,16 +10,19 @@ using Abp.AspNetCore.Mvc.Authorization;
 using Abp.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace CityInfo.Web.Mvc.Controllers
 {
     [AbpMvcAuthorize]
     public class GalleriesController : AbpController
     {
+        private IHostingEnvironment _hostingEnvironment;
         private readonly Solution _context;
 
-        public GalleriesController(Solution context)
+        public GalleriesController(Solution context,IHostingEnvironment hostingEnvironment)
         {
+            _hostingEnvironment = hostingEnvironment;
             _context = context;
         }
 
@@ -63,17 +66,30 @@ namespace CityInfo.Web.Mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(IFormFile file,[Bind("id,id_tempat,id_kategori,image")] Gallery gallery)
+        public async Task<IActionResult> Create(IFormFile file, [Bind("id,id_kategori,id_tempat")]Gallery gallery)
         {
-            var uploads = Path.Combine("images");
+            var uploads = _hostingEnvironment.WebRootPath + "\\gallery\\";
+
+            // Path.Combine("images");
             if (ModelState.IsValid)
             {
                 if (file.Length > 0)
                 {
                     using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
                     await file.CopyToAsync(fileStream);
-                    _context.Add(gallery);
-                    await _context.SaveChangesAsync();
+
+                    
+                        using (var stream = new MemoryStream())
+                        {
+                            await file.CopyToAsync(stream);
+                            gallery.image = file.FileName;
+                        _context.Gallery.Add(gallery);
+                        _context.SaveChanges();
+
+                    }
+                    
+
+
                     return RedirectToAction(nameof(Index));
                 }
             }

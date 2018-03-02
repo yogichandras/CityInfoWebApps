@@ -23,6 +23,8 @@ namespace CityInfo.EntityFrameworkCore
 
         public virtual DbSet<MasterKategori> Kategori { get; set; }
 
+        public virtual DbSet<MasterGallery> Gallery { get; set; }
+
 
 
     }

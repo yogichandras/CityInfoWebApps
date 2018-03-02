@@ -3,6 +3,7 @@ using Abp.Domain.Services;
 using Abp.UI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,11 +27,10 @@ namespace CityInfo.Models
             return _repositoryTempat.Get(Id);
         }
 
-        public MasterTempat GetTempatByIdKategori(int IdKategori)
+        public IEnumerable<MasterTempat> GetTempatByIdKategori(int IdKategori)
         {
-            return _repositoryTempat.Get(IdKategori);
+            return _repositoryTempat.GetAll().Where(t => t.IdKategori == IdKategori).ToList();
         }
-
 
     }
 }

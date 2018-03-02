@@ -29,10 +29,10 @@ namespace CityInfo.Master_Tempat
             return output;
         }
 
-        public GetTempatOutput GetTempatByIdKategori(GetTempatKategori input)
+        public IEnumerable<GetTempatOutput> GetTempatByIdKategori(GetTempatKategori input)
         {
-            var getTempatKategori = _tempatManager.GetTempatByIdKategori(input.IdKategori);
-            GetTempatOutput output = Mapper.Map<MasterTempat, GetTempatOutput>(getTempatKategori);
+            var getTempatKategori = _tempatManager.GetTempatByIdKategori(input.IdKategori).ToList();
+            List<GetTempatOutput> output = Mapper.Map<List<MasterTempat>, List<GetTempatOutput>>(getTempatKategori);
             return output;
         }
 
