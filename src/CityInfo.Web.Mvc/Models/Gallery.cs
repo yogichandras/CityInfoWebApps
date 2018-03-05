@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Abp.Dependency;
+using Abp.Runtime.Session;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,8 +11,12 @@ namespace CityInfo.Web.Models
 {
     public class Gallery
     {
+      
+
         [Key]
         public int id { get; set; }
+
+        public DateTime CreationTime { get; set; }
 
         public MasterTempat MasterTempat { get; set; }
 
@@ -23,6 +29,21 @@ namespace CityInfo.Web.Models
         public int id_kategori { get; set; }
 
         public string image { get; set; }
+
+        public long? CreateBy { get; set; }
+
+        public long? UpdateBy { get; set; }
+
+        public Gallery()
+        {
+            CreationTime = DateTime.Now;
+          
+        }
+
+       
+          
+        
+
 
     }
 }

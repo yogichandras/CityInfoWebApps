@@ -8,19 +8,25 @@ using Abp.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Abp.Dependency;
+using Abp.Runtime.Session;
 
 namespace CityInfo.Web.Mvc.Controllers
 {
     [AbpMvcAuthorize]
-    public class TempatController : AbpController
+    public class TempatController : AbpController, ITransientDependency
     {
+        public IAbpSession AbpLogin { get; set; }
+
         private IHostingEnvironment _hostingEnvironment;
         private readonly Solution _context;
+        
 
         public TempatController(Solution context,IHostingEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
             _context = context;
+            AbpLogin = NullAbpSession.Instance;
         }
 
         [HttpPost]
@@ -69,15 +75,20 @@ namespace CityInfo.Web.Mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,title,createdate,picture,idKategori")] MasterTempat masterTempat)
+        public async Task<IActionResult> Create([Bind("id,CreateBy,title,createdate,picture,idKategori")] MasterTempat masterTempat)
         {
+            var currentUserId = AbpSession.UserId;
             if (ModelState.IsValid)
             {
-                _context.Add(masterTempat);
-                await _context.SaveChangesAsync();
+               
+                     masterTempat.CreateBy = currentUserId;
+                     _context.Tempat.Add(masterTempat);
+                    await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
             return View(masterTempat);
+
         }
 
        
@@ -103,8 +114,9 @@ namespace CityInfo.Web.Mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,title,createdate,picture,idKategori")] MasterTempat masterTempat)
+        public async Task<IActionResult> Edit(int id, [Bind("id,CreateBy,UpdateBy,title,createdate,picture,idKategori")] MasterTempat masterTempat)
         {
+            var currentUserId = AbpSession.UserId;
             if (id != masterTempat.id)
             {
                 return NotFound();
@@ -114,8 +126,11 @@ namespace CityInfo.Web.Mvc.Controllers
             {
                 try
                 {
-                    _context.Update(masterTempat);
+                    masterTempat.UpdateBy = currentUserId;
+                    _context.Tempat.Update(masterTempat);
                     await _context.SaveChangesAsync();
+     
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {

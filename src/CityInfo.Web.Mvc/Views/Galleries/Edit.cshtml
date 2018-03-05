@@ -14,6 +14,8 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="id" />
+
+            <input type="hidden" asp-for="CreateBy" />
             <div class="form-group">
                 <label asp-for="id_tempat" class="control-label"></label>
                 <select asp-for="id_tempat" class="form-control" asp-items="ViewBag.id_tempat"></select>

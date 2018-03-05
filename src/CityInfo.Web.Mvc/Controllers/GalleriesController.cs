@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Abp.AspNetCore.Mvc.Authorization;
+using Abp.AspNetCore.Mvc.Controllers;
+using Abp.Dependency;
+using Abp.Runtime.Session;
+using CityInfo.Web.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CityInfo.Web.Models;
-using Abp.AspNetCore.Mvc.Authorization;
-using Abp.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Http;
+using System;
 using System.IO;
-using Microsoft.AspNetCore.Hosting;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CityInfo.Web.Mvc.Controllers
 {
     [AbpMvcAuthorize]
-    public class GalleriesController : AbpController
+    public class GalleriesController : AbpController, ITransientDependency
     {
+        public IAbpSession AbpLogin { get; set; }
+
+
         private IHostingEnvironment _hostingEnvironment;
         private readonly Solution _context;
 
@@ -24,6 +28,7 @@ namespace CityInfo.Web.Mvc.Controllers
         {
             _hostingEnvironment = hostingEnvironment;
             _context = context;
+            AbpLogin = NullAbpSession.Instance;
         }
 
         // GET: Galleries
@@ -66,10 +71,10 @@ namespace CityInfo.Web.Mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(IFormFile file, [Bind("id,id_kategori,id_tempat")]Gallery gallery)
+        public async Task<IActionResult> Create(IFormFile file, [Bind("id,CreateBy,CreationTime,id_kategori,id_tempat")]Gallery gallery)
         {
             var uploads = _hostingEnvironment.WebRootPath + "\\gallery\\";
-
+            var currentUserId = AbpSession.UserId;
             // Path.Combine("images");
             if (ModelState.IsValid)
             {
@@ -78,20 +83,22 @@ namespace CityInfo.Web.Mvc.Controllers
                     using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
                     await file.CopyToAsync(fileStream);
 
+
                     
                         using (var stream = new MemoryStream())
                         {
                             await file.CopyToAsync(stream);
                             gallery.image = file.FileName;
+                        gallery.CreationTime = DateTime.Now;
+                        gallery.CreateBy = currentUserId;
                         _context.Gallery.Add(gallery);
                         _context.SaveChanges();
 
+                       
                     }
                     
-
-
-                    return RedirectToAction(nameof(Index));
                 }
+                return RedirectToAction(nameof(Index));
             }
             ViewData["id_kategori"] = new SelectList(_context.Kategori, "id", "id", gallery.id_kategori);
             ViewData["id_tempat"] = new SelectList(_context.Tempat, "id", "id", gallery.id_tempat);
@@ -121,8 +128,9 @@ namespace CityInfo.Web.Mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,id_tempat,id_kategori,image")] Gallery gallery)
+        public async Task<IActionResult> Edit(int id, [Bind("id,CreateBy,UpdateBy,id_tempat,id_kategori,image")] Gallery gallery)
         {
+            var currentUserId = AbpSession.UserId;
             if (id != gallery.id)
             {
                 return NotFound();
@@ -132,7 +140,8 @@ namespace CityInfo.Web.Mvc.Controllers
             {
                 try
                 {
-                    _context.Update(gallery);
+                    gallery.UpdateBy = currentUserId;
+                    _context.Gallery.Update(gallery);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

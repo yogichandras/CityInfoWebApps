@@ -26,6 +26,10 @@ namespace CityInfo.Web.Models
        
         public int idKategori { get; set; }
 
+        public long? CreateBy { get; set; }
+
+        public long? UpdateBy { get; set; }
+
 
     }
 }

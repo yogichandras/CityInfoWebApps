@@ -40,6 +40,15 @@
                                 ID
                             </th>
                             <th>
+                                CREATED BY
+                            </th>
+                            <th>
+                                UPDATE BY
+                            </th>
+                            <th>
+                                DATE CREATED
+                            </th>
+                            <th>
                                 Image Name
                             </th>
                             <th>
@@ -57,6 +66,15 @@
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateBy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UpdateBy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreationTime)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.image)
