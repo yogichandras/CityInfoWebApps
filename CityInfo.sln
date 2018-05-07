@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Web.Mvc", "src\Cit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.EntityFrameworkCore", "src\CityInfo.EntityFrameworkCore\CityInfo.EntityFrameworkCore.csproj", "{E0580562-F8F2-4EBB-B07A-ABFC6F2C314F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cityinfo.Web.Landing", "Cityinfo.Web.Landing\Cityinfo.Web.Landing.csproj", "{E561E0CB-E7C7-4DBC-BBC4-5287E8AA8775}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityInfo.Web.Website", "CityInfo.Web.Website\CityInfo.Web.Website.csproj", "{31DC4DC3-A9CF-490C-B9F8-748B36796D83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +63,10 @@ Global
 		{E0580562-F8F2-4EBB-B07A-ABFC6F2C314F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0580562-F8F2-4EBB-B07A-ABFC6F2C314F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0580562-F8F2-4EBB-B07A-ABFC6F2C314F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E561E0CB-E7C7-4DBC-BBC4-5287E8AA8775}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E561E0CB-E7C7-4DBC-BBC4-5287E8AA8775}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E561E0CB-E7C7-4DBC-BBC4-5287E8AA8775}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E561E0CB-E7C7-4DBC-BBC4-5287E8AA8775}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31DC4DC3-A9CF-490C-B9F8-748B36796D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31DC4DC3-A9CF-490C-B9F8-748B36796D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31DC4DC3-A9CF-490C-B9F8-748B36796D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31DC4DC3-A9CF-490C-B9F8-748B36796D83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,9 +80,9 @@ Global
 		{22CFE0D2-8DCA-42D7-AD7D-784C3862493F} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 		{A2213374-BB48-48FD-BBD4-81E6A961D866} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 		{E0580562-F8F2-4EBB-B07A-ABFC6F2C314F} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
-		{E561E0CB-E7C7-4DBC-BBC4-5287E8AA8775} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
+		{31DC4DC3-A9CF-490C-B9F8-748B36796D83} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {EF615A0F-F8C7-4110-961E-396032122910}
+		SolutionGuid = {C60B7BE3-C9AE-40D6-BE42-53DADBCF91A4}
 	EndGlobalSection
 EndGlobal
