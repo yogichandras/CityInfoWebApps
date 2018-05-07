@@ -40,9 +40,8 @@ namespace CityInfo.Web.Startup
             services.AddMvc(
                 options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute())
             );
-
-
-            var connection = @"server=localhost;userid=root;password=;database=cityinfodb";
+           
+            var connection = @"Server = localhost; Port = 3306; Database = cityinfodb; Uid = cityinfo; Pwd =Cipandan@40;convert zero datetime=True;";
             services.AddDbContext<Solution>(options => options.UseMySql(connection));
 
             IdentityRegistrar.Register(services);
